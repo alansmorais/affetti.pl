@@ -45,6 +45,7 @@
             text-decoration: none;
             color: #999999;
             transition: color 0.3s ease;
+            cursor: pointer;
         }
         .lang-switcher a:hover {
             color: #222222;
@@ -169,24 +170,24 @@
     <div class="wrapper">
         
         <div class="lang-switcher">
-            <a href="#" class="active">PL</a> &nbsp;|&nbsp; 
-            <a href="#">UA</a> &nbsp;|&nbsp; 
-            <a href="#">EN</a>
+            <a href="#" onclick="switchLang('pl'); return false;" id="lang-pl" class="active">PL</a> &nbsp;|&nbsp; 
+            <a href="#" onclick="switchLang('ua'); return false;" id="lang-ua">UA</a> &nbsp;|&nbsp; 
+            <a href="#" onclick="switchLang('en'); return false;" id="lang-en">EN</a>
         </div>
 
         <main class="main-content">
             <div class="brand-logo">Affetti</div>
             
-            <h1>Elegancja w przygotowaniu.</h1>
+            <h1 id="t-title">Elegancja w przygotowaniu.</h1>
             
-            <p class="subtitle">
+            <p class="subtitle" id="t-subtitle">
                 Nasza platforma luksusowych magazynów jest obecnie w przebudowie. Przygotowujemy dla Ciebie nowe, wyjątkowe doświadczenie. Zostaw swój adres e-mail poniżej, aby dowiedzieć się o naszym starcie jako pierwsza.
             </p>
             
             <!-- Google Apps Script Form -->
             <form id="waitlistForm" class="waitlist-form">
                 <input type="email" id="email" name="email" class="input-email" placeholder="Wpisz swój adres e-mail..." required>
-                <input type="hidden" name="lang" value="PL">
+                <input type="hidden" id="langInput" name="lang" value="PL">
                 <button type="submit" class="btn-submit" id="submitBtn">Powiadom mnie</button>
             </form>
             
@@ -199,7 +200,58 @@
     </div>
 
     <script>
-        // 🚨 IMPORTANT: Replace this URL with your Google Apps Script Web App URL!
+        // Translations Dictionary
+        const translations = {
+            pl: {
+                title: "Elegancja w przygotowaniu.",
+                subtitle: "Nasza platforma luksusowych magazynów jest obecnie w przebudowie. Przygotowujemy dla Ciebie nowe, wyjątkowe doświadczenie. Zostaw swój adres e-mail poniżej, aby dowiedzieć się o naszym starcie jako pierwsza.",
+                placeholder: "Wpisz swój adres e-mail...",
+                button: "Powiadom mnie",
+                loading: "Wysyłanie...",
+                success: "Dziękujemy! Twój adres został zapisany pomyślnie.",
+                error: "Wystąpił błąd. Upewnij się, że link Google Script jest poprawny."
+            },
+            ua: {
+                title: "Елегантність у розробці.",
+                subtitle: "Наша платформа розкішних журналів наразі оновлюється. Ми готуємо для вас новий, винятковий досвід. Залиште свою електронну адресу нижче, щоб першими дізнатися про наш запуск.",
+                placeholder: "Введіть свою електронну пошту...",
+                button: "Повідомити мене",
+                loading: "Надсилання...",
+                success: "Дякуємо! Вашу адресу успішно збережено.",
+                error: "Сталася помилка. Переконайтеся, що посилання Google Script правильне."
+            },
+            en: {
+                title: "Elegance in the making.",
+                subtitle: "Our luxury magazine platform is currently under maintenance as we prepare a new, beautiful experience. Leave your email below to be the first to know when we launch.",
+                placeholder: "Enter your email address...",
+                button: "Notify Me",
+                loading: "Sending...",
+                success: "Thank you! Your email has been successfully saved.",
+                error: "An error occurred. Make sure the Google Script link is correct."
+            }
+        };
+
+        let currentLang = 'pl';
+
+        function switchLang(lang) {
+            currentLang = lang;
+            
+            // Update active states on switcher
+            document.querySelectorAll('.lang-switcher a').forEach(el => el.classList.remove('active'));
+            document.getElementById('lang-' + lang).classList.add('active');
+            
+            // Update texts
+            document.getElementById('t-title').textContent = translations[lang].title;
+            document.getElementById('t-subtitle').textContent = translations[lang].subtitle;
+            document.getElementById('email').placeholder = translations[lang].placeholder;
+            document.getElementById('submitBtn').textContent = translations[lang].button;
+            document.getElementById('langInput').value = lang.toUpperCase();
+            
+            // Clear message box on language change
+            document.getElementById('formMessage').style.display = 'none';
+        }
+
+        // Google Apps Script endpoint URL
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwGDeXIdED_ntJeAzOUEaceK3meFAdugRDTIiTTnIxGebHWopYPjXiI_DC66AMuQaD4/exec';
         
         const form = document.getElementById('waitlistForm');
@@ -210,7 +262,7 @@
             e.preventDefault();
             
             // UI Loading state
-            submitBtn.textContent = "Wysyłanie...";
+            submitBtn.textContent = translations[currentLang].loading;
             submitBtn.style.opacity = "0.7";
             submitBtn.disabled = true;
             messageDiv.style.display = "none";
@@ -225,22 +277,20 @@
             .then(response => response.json())
             .then(data => {
                 if (data.result === 'success') {
-                    messageDiv.textContent = "Dziękujemy! Twój adres został zapisany pomyślnie.";
-                    messageDiv.style.color = "#C8A76A"; // Gold text for success
+                    messageDiv.textContent = translations[currentLang].success;
+                    messageDiv.style.color = "#C8A76A"; 
                     form.reset();
                 } else {
                     throw new Error("Błąd zapisu.");
                 }
             })
             .catch(error => {
-                // If it fails (usually due to CORS on testing environments, or missing SCRIPT_URL)
-                messageDiv.textContent = "Wystąpił błąd. Upewnij się, że link Google Script jest poprawny.";
-                messageDiv.style.color = "#d9534f"; // Red text for errors
+                messageDiv.textContent = translations[currentLang].error;
+                messageDiv.style.color = "#d9534f"; 
             })
             .finally(() => {
-                // Reset UI state
                 messageDiv.style.display = "block";
-                submitBtn.textContent = "Powiadom mnie";
+                submitBtn.textContent = translations[currentLang].button;
                 submitBtn.style.opacity = "1";
                 submitBtn.disabled = false;
             });
