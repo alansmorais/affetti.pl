@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Affetti - W przebudowie</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/Logo_Affetti.png">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
@@ -21,7 +24,6 @@
 
         .wrapper { display: flex; flex-direction: column; min-height: 100vh; }
 
-        /* New Header Structure */
         header {
             display: flex;
             justify-content: space-between;
@@ -30,8 +32,8 @@
         }
 
         .logo-img {
-            width: 100px;
-            height: 100px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             object-fit: cover;
             border: 1px solid #C8A76A;
@@ -95,7 +97,7 @@
 
     <div class="wrapper">
         <header>
-            <img src="images/Logo_Affetti.png" alt="Affetti Logo" class="logo-img" onerror="this.style.display='none'">
+            <img src="images/Logo_Affetti.png" alt="Affetti Logo" class="logo-img">
             <div class="nav-right">
                 <svg onclick="openModal()" class="insta-btn" viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 <div class="lang-switcher">
@@ -131,11 +133,9 @@
     </div>
 
     <script>
-        // Modal Logic
         function openModal() { document.getElementById('instaModal').style.display = 'flex'; }
         function closeModal() { document.getElementById('instaModal').style.display = 'none'; }
 
-        // Language Logic (same as before)
         const translations = {
             pl: { title: "Elegancja w przygotowaniu.", subtitle: "Nasza platforma luksusowych magazynów jest obecnie w przebudowie. Przygotowujemy dla Ciebie nowe, wyjątkowe doświadczenie. Zostaw swój adres e-mail poniżej.", placeholder: "Wpisz swój adres e-mail...", button: "Powiadom mnie", success: "Dziękujemy! Twój adres został zapisany pomyślnie." },
             ua: { title: "Елегантність у розробці.", subtitle: "Наша платформа розкішних журналів наразі оновлюється. Ми готуємо для вас новий, винятковий досвід. Залиште свою електронну адресу нижче.", placeholder: "Введіть свою електронну пошту...", button: "Повідомити мене", success: "Дякуємо! Вашу адресу успішно збережено." },
@@ -153,7 +153,6 @@
             document.getElementById('langInput').value = lang.toUpperCase();
         }
 
-        // GAS Form Submission
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwGDeXIdED_ntJeAzOUEaceK3meFAdugRDTIiTTnIxGebHWopYPjXiI_DC66AMuQaD4/exec';
         document.getElementById('waitlistForm').addEventListener('submit', (e) => {
             e.preventDefault();
