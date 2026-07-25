@@ -1,71 +1,250 @@
-<body>
-    <div class="header">
-        <span class="active">PL</span> &nbsp;|&nbsp; UA &nbsp;|&nbsp; EN
-    </div>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affetti - W przebudowie</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    <div class="page-wrapper">
-        <div class="content-container">
+        body {
+            background-color: #F8F4EF;
+            font-family: 'Poppins', sans-serif;
+            color: #222222;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Full screen wrapper using Flexbox */
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* Language Switcher */
+        .lang-switcher {
+            position: absolute;
+            top: 40px;
+            right: 50px;
+            font-size: 12px;
+            color: #999999;
+            letter-spacing: 2px;
+        }
+        .lang-switcher a {
+            text-decoration: none;
+            color: #999999;
+            transition: color 0.3s ease;
+        }
+        .lang-switcher a:hover {
+            color: #222222;
+        }
+        .lang-switcher a.active {
+            color: #C8A76A;
+            font-weight: 500;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .brand-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #C8A76A;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: #222222;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666666;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .waitlist-form {
+            margin-top: 3rem;
+            display: flex;
+            width: 100%;
+            max-width: 500px;
+            justify-content: center;
+        }
+
+        .input-email {
+            flex: 1;
+            padding: 18px 24px;
+            border: 1px solid #C8A76A;
+            background-color: #FFFFFF;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            color: #222222;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        .input-email:focus {
+            border-color: #222222;
+        }
+
+        .input-email::placeholder {
+            color: #999999;
+        }
+
+        .btn-submit {
+            padding: 18px 36px;
+            background-color: #222222;
+            color: #C8A76A;
+            border: 1px solid #222222;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+
+        .form-message {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            min-height: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.75rem;
+            color: #999999;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8rem; }
+            .lang-switcher { top: 20px; right: 20px; }
+            .brand-logo { font-size: 2rem; }
+            .waitlist-form { flex-direction: column; padding: 0 20px; }
+            .btn-submit { margin-top: 10px; width: 100%; }
+            .subtitle { padding: 0 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        
+        <div class="lang-switcher">
+            <a href="#" class="active">PL</a> &nbsp;|&nbsp; 
+            <a href="#">UA</a> &nbsp;|&nbsp; 
+            <a href="#">EN</a>
+        </div>
+
+        <main class="main-content">
             <div class="brand-logo">Affetti</div>
+            
             <h1>Elegancja w przygotowaniu.</h1>
+            
             <p class="subtitle">
-                Nasza platforma luksusowych magazynów jest obecnie w przebudowie. Przygotowujemy dla Ciebie nowe, wyjątkowe doświadczenie. Zostaw swój adres e-mail poniżej, aby dowiedzieć się o naszym starcie jako pierwsza osoba.
+                Nasza platforma luksusowych magazynów jest obecnie w przebudowie. Przygotowujemy dla Ciebie nowe, wyjątkowe doświadczenie. Zostaw swój adres e-mail poniżej, aby dowiedzieć się o naszym starcie jako pierwsza.
             </p>
             
-            <!-- Real Form replacing the mock -->
-            <form id="waitlist-form" class="form-group">
-                <input type="email" id="email" name="email" class="input-mock" placeholder="Wpisz swój adres e-mail..." required>
+            <!-- Google Apps Script Form -->
+            <form id="waitlistForm" class="waitlist-form">
+                <input type="email" id="email" name="email" class="input-email" placeholder="Wpisz swój adres e-mail..." required>
                 <input type="hidden" name="lang" value="PL">
-                <button type="submit" class="btn-mock">Powiadom mnie</button>
+                <button type="submit" class="btn-submit" id="submitBtn">Powiadom mnie</button>
             </form>
             
-            <!-- Success/Error Message container -->
-            <div id="form-message" style="margin-top: 15px; font-size: 10pt; color: #C8A76A; display: none;"></div>
-        </div>
-    </div>
+            <div id="formMessage" class="form-message" style="display: none;"></div>
+        </main>
 
-    <div class="footer">
-        &copy; Copyright Affetti. Designed by Alansm Solutions.
+        <footer class="footer">
+            &copy; Copyright Affetti. Designed by Alansm Solutions.
+        </footer>
     </div>
 
     <script>
-        // Replace this with the URL you copied from Google Apps Script
+        // 🚨 IMPORTANT: Replace this URL with your Google Apps Script Web App URL!
         const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
         
-        const form = document.getElementById('waitlist-form');
-        const messageDiv = document.getElementById('form-message');
-        const submitBtn = form.querySelector('button');
+        const form = document.getElementById('waitlistForm');
+        const messageDiv = document.getElementById('formMessage');
+        const submitBtn = document.getElementById('submitBtn');
 
-        form.addEventListener('submit', e => {
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Change button state
+            // UI Loading state
             submitBtn.textContent = "Wysyłanie...";
+            submitBtn.style.opacity = "0.7";
             submitBtn.disabled = true;
+            messageDiv.style.display = "none";
 
-            // Gather form data
             const formData = new FormData(form);
 
-            // Send to Google Apps Script
-            fetch(SCRIPT_URL, { method: 'POST', body: formData })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.result === 'success') {
-                        messageDiv.textContent = "Dziękujemy! Twój adres został zapisany.";
-                        messageDiv.style.color = "#C8A76A";
-                        form.reset();
-                    } else {
-                        throw new Error("Błąd zapisu.");
-                    }
-                })
-                .catch(error => {
-                    messageDiv.textContent = "Wystąpił błąd. Spróbuj ponownie później.";
-                    messageDiv.style.color = "red";
-                })
-                .finally(() => {
-                    messageDiv.style.display = "block";
-                    submitBtn.textContent = "Powiadom mnie";
-                    submitBtn.disabled = false;
-                });
+            // Fetch request to Google Apps Script
+            fetch(SCRIPT_URL, { 
+                method: 'POST', 
+                body: formData 
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    messageDiv.textContent = "Dziękujemy! Twój adres został zapisany pomyślnie.";
+                    messageDiv.style.color = "#C8A76A"; // Gold text for success
+                    form.reset();
+                } else {
+                    throw new Error("Błąd zapisu.");
+                }
+            })
+            .catch(error => {
+                // If it fails (usually due to CORS on testing environments, or missing SCRIPT_URL)
+                messageDiv.textContent = "Wystąpił błąd. Upewnij się, że link Google Script jest poprawny.";
+                messageDiv.style.color = "#d9534f"; // Red text for errors
+            })
+            .finally(() => {
+                // Reset UI state
+                messageDiv.style.display = "block";
+                submitBtn.textContent = "Powiadom mnie";
+                submitBtn.style.opacity = "1";
+                submitBtn.disabled = false;
+            });
         });
     </script>
 </body>
+</html>
